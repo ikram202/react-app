@@ -1,0 +1,36 @@
+import { createStore } from "redux";
+import { combineReducers } from "redux";
+
+
+const counterReducer = (state = { count : 0}, action) => {
+    switch (action.type){
+        case 'INC' :
+            return { count: state.count +1 }
+        case 'INCV' :
+            return { count: state.count+ action.pyload }
+        case 'DEC' :
+            return { count: state.count -1  }
+        case 'RESET' :
+            return { count: 0}
+        default :
+            return state
+    }
+}
+
+const loginReducer = (state={email:"ikram",password:"1234",isLogin:false},action )=>{
+   switch (action.type) {
+       case "LOGIN":
+            return { isLogin: true }
+       case "LOGOUT":
+            return { isLogin: false}
+       default:
+            return state
+   }
+}
+
+const allReducer = combineReducers({
+    counter: counterReducer,
+    loginUser: loginReducer,
+})
+const store = createStore(allReducer)
+export default store
